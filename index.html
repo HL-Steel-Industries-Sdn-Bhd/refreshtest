@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自动刷新测试</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+    #counter-box {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 60px;
+      height: 40px;
+      background: #f39c12;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="counter-box">0</div>
+
+<script>
+  // 读取 localStorage 中的数值，确保刷新后还能继续累加
+  let count = parseInt(localStorage.getItem('refreshCount')) || 0;
+  const counterBox = document.getElementById('counter-box');
+  counterBox.textContent = count;
+
+  // 每 30 秒刷新页面
+  setTimeout(() => {
+    count++; // 累加
+    localStorage.setItem('refreshCount', count); // 保存到 localStorage
+    location.reload(); // 刷新页面
+  }, 30000);
+</script>
+
+</body>
+</html>
