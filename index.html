@@ -23,25 +23,41 @@
       font-size: 20px;
       border-radius: 5px;
     }
+    #time-box {
+      position: fixed;
+      top: 10px;
+      left: 80px;
+      padding: 5px 10px;
+      background: #3498db;
+      color: white;
+      border-radius: 5px;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
 
 <div id="counter-box">0</div>
+<div id="time-box">时间</div>
 
 <script>
-  // 读取 localStorage 中的数值，确保刷新后还能继续累加
+  // 读取 localStorage 中的计数
   let count = parseInt(localStorage.getItem('refreshCount')) || 0;
   const counterBox = document.getElementById('counter-box');
   counterBox.textContent = count;
 
+  // 显示当前刷新时间
+  const timeBox = document.getElementById('time-box');
+  timeBox.textContent = new Date().toLocaleTimeString();
+
   // 每 30 秒刷新页面
   setTimeout(() => {
     count++; // 累加
-    localStorage.setItem('refreshCount', count); // 保存到 localStorage
+    localStorage.setItem('refreshCount', count); // 保存计数
     location.reload(); // 刷新页面
   }, 30000);
 </script>
 
 </body>
 </html>
+
